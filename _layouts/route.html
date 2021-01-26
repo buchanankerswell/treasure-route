@@ -51,7 +51,9 @@
   <hr>
   <h2 style="margin-top:1em; margin-bottom:1em;">See how I got on</h2>
   {% if page.route-leaflet %}
-  <iframe width="1265" height="631" max-width="100%" src="{{ page.youtube }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="embed-video">
+    <iframe src="{{ page.youtube }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
   {% endif %}
   {% include footer.html %}
 </body>
