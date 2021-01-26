@@ -1,17 +1,31 @@
 <section class="tiles">
-
-{% for post in site.posts limit:site.front-page-posts %}
-	<article class="style{{ forloop.index | plus:1 }}">
+	{% for page in site.pages limit:site.front-page-pages %}
+	{% if page.title and page.title != 'Home' and page.title != 'Generic Test' and page.title != 'Elements' and page.title != 'Coffee' %}
+	<article class="style{{ forloop.index | minus:5 }}">
 		<span class="image">
-			<img src="{{ site.url }}{{ site.baseurl }}/images/pic01.jpg" alt="" />
+			<img src="{{ page.tile-image }}" alt="" />
 		</span>
-		<a href="{{ post.url | prepend:site.baseurl | prepend:site.url }}">
-			<h2>{{ post.title }}</h2>
-			<div class="content">
-				<p>{{ post.excerpt }}</p>
-			</div>
+		<a href="{{ page.url | prepend:site.baseurl | prepend:site.url }}">
+			<h2>{{ page.title }}</h2>
+			<ul class="alt" style="font-weight:600;">
+				{% if page.tile-dist %}
+				<li> Distance: {{ page.route-dist }} </li>
+				{% endif %}
+				{% if page.tile-elev %}
+				<li> Elevation: {{ page.route-elev }} </li>
+				{% endif %}
+				{% if page.tile-duration %}
+				<li> Duration: {{ page.route-duration }} </li>
+				{% endif %}
+				{% if page.tile-difficulty %}
+				<li> Difficulty: {{ page.route-difficulty }} </li>
+				{% endif %}
+			</ul>
+			{% if page.route-desc %}
+			<p style="font-weight: 600;"> {{ page.route-desc }} </p>
+			{% endif %}
 		</a>
 	</article>
-{% endfor %}
-
+	{% endif %}
+	{% endfor %}
 </section>

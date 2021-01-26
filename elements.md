@@ -27,9 +27,11 @@ while (!deck.isInOrder()) {
 }
 
 print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+
 </section>
 
 <!-- Lists -->
+
 <section>
 <h2>Lists</h2>
 <div class="row">
@@ -106,6 +108,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 </section>
 
 <!-- Table -->
+
 <section>
 <h2>Table</h2>
 <h3>Default</h3>
@@ -202,6 +205,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 </section>
 
 <!-- Buttons -->
+
 <section>
 <h3>Buttons</h3>
 <ul class="actions">
@@ -235,6 +239,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 </section>
 
 <!-- Form -->
+
 <section>
 <h2>Form</h2>
 <form method="post" action="#">
@@ -290,27 +295,28 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 </section>
 
 <!-- Image -->
+
 <section>
 <h2>Image</h2>
 <h3>Fit</h3>
 <div class="box alt">
 <div class="row uniform">
-<div class="12u$"><span class="image fit"><img src="images/pic13.jpg" alt="" /></span></div>
-<div class="4u"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-<div class="4u"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-<div class="4u$"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-<div class="4u"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-<div class="4u"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
-<div class="4u$"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-<div class="4u"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
-<div class="4u"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
-<div class="4u$"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
+<div class="12u$"><span class="image fit"><img src="assets/images/pic13.jpg" alt="" /></span></div>
+<div class="4u"><span class="image fit"><img src="assets/images/pic01.jpg" alt="" /></span></div>
+<div class="4u"><span class="image fit"><img src="assets/images/pic02.jpg" alt="" /></span></div>
+<div class="4u$"><span class="image fit"><img src="assets/images/pic03.jpg" alt="" /></span></div>
+<div class="4u"><span class="image fit"><img src="assets/images/pic03.jpg" alt="" /></span></div>
+<div class="4u"><span class="image fit"><img src="assets/images/pic01.jpg" alt="" /></span></div>
+<div class="4u$"><span class="image fit"><img src="assets/images/pic02.jpg" alt="" /></span></div>
+<div class="4u"><span class="image fit"><img src="assets/images/pic02.jpg" alt="" /></span></div>
+<div class="4u"><span class="image fit"><img src="assets/images/pic03.jpg" alt="" /></span></div>
+<div class="4u$"><span class="image fit"><img src="assets/images/pic01.jpg" alt="" /></span></div>
 </div>
 </div>
 
 <h3>Left &amp; Right</h3>
-<p><span class="image left"><img src="images/pic14.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+<p><span class="image left"><img src="assets/images/pic14.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
 
-<p><span class="image right"><img src="images/pic15.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+<p><span class="image right"><img src="assets/images/pic15.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
 
 </section>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+{% include head.html %}
+
+<body>
+  {% include header.html %}
+  <h1>{{ page.title }}</h1>
+  {% if page.featured-video %}
+  <video muted autoplay plays-inline loop width="100%">
+    <source src="{{ page.featured-video }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  {% endif %}
+  <hr>
+  <div class="box alt">
+    <div class="row uniform">
+      <div class="12u"><span class="image fit"><img src="{{ page.route-comp }}" alt="" /></span></div>
+    </div>
+  </div>
+  <div>
+    <h2 style="margin-top:1em; margin-bottom:1em;">Route Info</h2>
+    <span class="image left"><img src="{{ page.featured-image }}" alt="" /></span>
+    <ul class="alt">
+      {% if page.route-dist %}
+      <li> Distance: {{ page.route-dist }} </li>
+      {% endif %}
+      {% if page.route-elev %}
+      <li> Elevation: {{ page.route-elev }} </li>
+      {% endif %}
+      {% if page.route-duration %}
+      <li> Duration: {{ page.route-duration }} </li>
+      {% endif %}
+      {% if page.route-difficulty %}
+      <li> Difficulty: {{ page.route-difficulty }} </li>
+      {% endif %}
+    </ul>
+    {{ page.route-info }}
+  </div>
+  <hr>
+  <div>
+    <h2 style="margin-top:1em; margin-bottom:1em;">Directions</h2>
+    <p><span class="image right"><img src="{{ page.alt-image }}" alt="" /></span>{{ page.route-directions }}</p>
+    {% include_relative {{ page.route-leaflet }} %}
+  </div>
+  {% include footer.html %}
+</body>
+
+</html>
