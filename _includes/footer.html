@@ -50,6 +50,9 @@
 				{% if site.email %}
 				<li><a href="mailto:{{ site.email }}" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
 				{% endif %}
+				{% if site.website %}
+				<li><a href="{{ site.website }}" class="icon style2 fa-globe"><span class="label">Website</span></a></li>
+				{% endif %}
 			</ul>
 		</section>
 		<ul class="copyright">
