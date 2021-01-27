@@ -8,7 +8,7 @@ tile-duration:
 tile-difficulty: Easy
 route-dist: 12 mi
 route-elev: 1316 ft
-route-duration: 1—1.5 hr
+route-duration: 1 to 1.5 hr
 route-difficulty: Easy
 route-desc: Fun route for non-serious cyclists
 route-info: This route is not a classic, although its two featured climbs are. These are half-baked wanderings for testing.

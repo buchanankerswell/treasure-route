@@ -8,7 +8,7 @@ tile-duration:
 tile-difficulty: Easy
 route-dist: 9 mi
 route-elev: 894 ft
-route-duration: 0.6—1 hr
+route-duration: 0.6 to 1 hr
 route-difficulty: Easy
 route-desc: Great views. Punchy topout. A must do
 route-info: You don't have to go far from the city to get on a great climb. Table Rock is the prominent cliff-forming mesa located directly E. of downtown. Try to spin up during the short approach. The grades are relatively continuous and manageable until the final 200-300 m approach to the topout. Your efforts are rewarded with one of the best views of the valley. Use the photo spot as an excuse to rest near the top, or snag it on your way down.
