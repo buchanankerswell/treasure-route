@@ -9,8 +9,8 @@
 title: Treasure Trove
 email: buck.kerswell@gmail.com
 description: Boise Area Cycling Routes
-baseurl: /treasure-trove # the subpath of your site, e.g. /blog
-url: # the base hostname & protocol for your site
+baseurl: # the subpath of your site, e.g. /blog
+url: https://boisetreasuretrove.com # the base hostname & protocol for your site
 
 # Logo settings
 logo-image-url: assets/images/logo.svg
