@@ -1,7 +1,7 @@
 <section class="tiles">
-	{% for page in site.pages limit:site.front-page-pages %}
-	{% if page.title and page.title != 'Home' and page.title != 'Generic Test' and page.title != 'Elements' and page.title != 'Coffee' %}
-	<article class="style{{ forloop.index | minus:5 }}">
+	{% for page in site.pages <!-- limit:site.front-page-pages --> %}
+	{% if page.title and page.title != 'Home' and page.title != 'Coffee' %}
+	<article class="style{{ forloop.index | minus:4 }}">
 		<span class="image">
 			<img src="{{ page.tile-image }}" alt="" />
 		</span>

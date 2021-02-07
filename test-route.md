@@ -5,11 +5,11 @@ tags:
 tile-dist:
 tile-elev:
 tile-duration:
-tile-difficulty: Easy
+tile-difficulty: "*"
 route-dist: 12 mi
 route-elev: 1316 ft
 route-duration: 1 to 1.5 hr
-route-difficulty: Easy
+route-difficulty: "*"
 route-desc: Fun route for non-serious cyclists
 route-info: This route is not a classic, although its two featured climbs are. These are half-baked wanderings for testing.
 route-directions: We start at District and head east on Boise Avenue. The ride is flat and pleasant with a wide bike lane and good views of the foothills to the north. We cross the Boise River at Barber Park. There is a nice stretch of tarmac here to open up short sprint efforts. You want to get the legs warmed up for the first climb---The Col du Harris North, which features double-digit grades. We get in one last punchy assent up Warm Springs Mesa before all of my equipment malfunctions. The track stops there, although we did eventually make it down.
