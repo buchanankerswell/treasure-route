@@ -21,6 +21,6 @@ route-comp: assets/gpx/courses/holy-trinity-comp-wide.png
 featured-image: assets/images/holy1.jpg
 alt-image: assets/images/holy2.jpg
 featured-video: assets/images/holy-trinity-warp-compressed.mp4
-youtube:
+youtube: https://www.youtube.com/watch?v=8pj9hpAUdks
 gpx: assets/gpx/holy-trinity.gpx
 ---
