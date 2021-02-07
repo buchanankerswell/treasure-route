@@ -21,6 +21,6 @@ route-comp: assets/gpx/courses/table-rock-comp-wide.png
 featured-image: assets/images/tr-view.jpg
 alt-image: assets/images/tr-sunset-bike.jpg
 featured-video: assets/images/table-rock-warp-compressed.mp4
-youtube: https://www.youtube.com/embed/fDjqFJxSc5A
+youtube: https://www.youtube.com/embed/O7AewW3-0RE
 gpx: assets/gpx/table-rock.gpx
 ---
