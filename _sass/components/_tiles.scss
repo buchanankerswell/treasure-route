@@ -128,6 +128,48 @@
 				}
 			}
 
+			&.style-1 {
+				> .image:before {
+					background-color: _palette(accent1);
+				}
+			}
+
+			&.style-2 {
+				> .image:before {
+					background-color: _palette(accent2);
+				}
+			}
+
+			&.style-3 {
+				> .image:before {
+					background-color: _palette(accent3);
+				}
+			}
+
+			&.style-4 {
+				> .image:before {
+					background-color: _palette(accent4);
+				}
+			}
+
+			&.style-5 {
+				> .image:before {
+					background-color: _palette(accent5);
+				}
+			}
+
+			&.style-6 {
+				> .image:before {
+					background-color: _palette(accent6);
+				}
+			}
+
+			&.style0 {
+				> .image:before {
+					background-color: _palette(accent3);
+				}
+			}
+
 			&.style1 {
 				> .image:before {
 					background-color: _palette(accent1);
@@ -159,6 +201,42 @@
 			}
 
 			&.style6 {
+				> .image:before {
+					background-color: _palette(accent6);
+				}
+			}
+
+			&.style7 {
+				> .image:before {
+					background-color: _palette(accent1);
+				}
+			}
+
+			&.style8 {
+				> .image:before {
+					background-color: _palette(accent2);
+				}
+			}
+
+			&.style9 {
+				> .image:before {
+					background-color: _palette(accent3);
+				}
+			}
+
+			&.style10 {
+				> .image:before {
+					background-color: _palette(accent4);
+				}
+			}
+
+			&.style11 {
+				> .image:before {
+					background-color: _palette(accent5);
+				}
+			}
+
+			&.style12 {
 				> .image:before {
 					background-color: _palette(accent6);
 				}

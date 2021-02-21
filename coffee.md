@@ -17,4 +17,4 @@ featured-image:
 </div>
 </div>
 
-What should I write about coffe??
+What should I write about coffe?? We like <a href="http://www.districtcoffeehouse.com">The District</a>, <a href="https://www.instagram.com/hydeperkcoffee/">Hyde Perk</a>, and <a href="https://www.acafeboise.com">á cafe</a>.
