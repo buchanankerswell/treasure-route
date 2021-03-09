@@ -11,23 +11,8 @@ suppressMessages({
   library(htmlwidgets)
   library(RColorBrewer)
   library(ggrepel)
-<<<<<<< HEAD
   library(ggsflabel)
 })
-
-cat('Defining course mapping functions\n')
-# Remove outliers
-replace_outliers <- function(x, na.rm = TRUE, ...) {
-  qnt <- quantile(x, probs=c(.25, .75), na.rm = na.rm, ...)
-  H <- 1.5 * IQR(x, na.rm = na.rm)
-  y <- x
-  y[x < (qnt[1] - 2*H)] <- 0
-  y[x > (qnt[2] + 2*H)] <- 0
-  y
-}
-=======
-})
->>>>>>> 1452479fe7c709d0ee299f970ec6eaf5a0be01e7
 
 cat('Defining course mapping functions\n')
 # Remove outliers
@@ -48,7 +33,17 @@ bbox_widen <- function(bbox, crs, borders = c('left' = 0.5, 'right' = 0.5, 'top'
   b[3] <- b[3] + (borders['right'] * xrange) # xmax - right
   b[2] <- b[2] - (borders['bottom'] * yrange) # ymin - bottom
   b[4] <- b[4] + (borders['top'] * yrange) # ymax - top
-  box <- st_polygon(list(matrix(c(b$xmin, b$ymax, b$xmin, b$ymin, b$xmax, b$ymin, b$xmax, b$ymax, b$xmin, b$ymax), ncol = 2, byrow = TRUE))) %>%
+  box <- st_polygon(list(matrix(c(b$xmin,
+																	b$ymax,
+																	b$xmin,
+																	b$ymin,
+																	b$xmax,
+																	b$ymin,
+																	b$xmax,
+																	b$ymax,
+																	b$xmin,
+																	b$ymax),
+												ncol = 2, byrow = TRUE))) %>%
     st_sfc(crs = crs)
   return(box)
 }
@@ -81,26 +76,17 @@ cat('Reading files\n')
 
 # List gpx files
 files <- list.files('.', '*.gpx')
-<<<<<<< HEAD
 
-=======
->>>>>>> 1452479fe7c709d0ee299f970ec6eaf5a0be01e7
 # Filenames
 fname <- map_chr(files, ~substr(.x, 1, nchar(.x)-4))
-cat('Found', length(files), 'files\n')
+fname <- map_chr(files, ~substr(.x, 1, nchar(.x)-4))
 cat('Courses:', fname, sep = '\n')
-<<<<<<< HEAD
 
-=======
->>>>>>> 1452479fe7c709d0ee299f970ec6eaf5a0be01e7
 # Take Rscript arguments
 args <- commandArgs(TRUE)
 f <- args[1]
 cat('Reading course:', f, '\n')
-<<<<<<< HEAD
 
-=======
->>>>>>> 1452479fe7c709d0ee299f970ec6eaf5a0be01e7
 # Read courses
 d <- readGPX(files[fname %in% f]) %>% as_tibble()
 course <- st_as_sf(d, coords = c(3,2), crs = 4326) %>%
@@ -124,21 +110,15 @@ course.smmry <- course %>%
                                           units = 'hours')),1))
 # Places
 places <- tibble(
-<<<<<<< HEAD
   place = c('District Coffee'),
-=======
-  place = c('district coffee'),
->>>>>>> 1452479fe7c709d0ee299f970ec6eaf5a0be01e7
   lat = c(43.618260),
   lon = c(-116.204595)
 ) %>%
   st_as_sf(coords = c(3,2), crs = 4326)
-
 # Plotting
 cat('Plotting course:', f, '\n')
 
-# Plot course
-<<<<<<< HEAD
+# Bounding box
 course.box <- 
   bbox_widen(st_bbox(course),
              crs = 4326,
@@ -150,8 +130,14 @@ course.box <-
 # Scaling factors
 w <- abs(st_bbox(course.box)$xmax - st_bbox(course.box)$xmin)
 h <- abs(st_bbox(course.box)$ymax - st_bbox(course.box)$ymin)
+p <- (w+w+h+h)
 a <- h*w
+title.size <- a * 1100
+plot.size <- a * 1600
+label.size <- a * 400
+if(!is.null(args[2])){plot.size <- plot.size * as.numeric(args[2])}
 
+# Plot course
 p.course <-
   course %>%
   st_combine() %>%
@@ -162,14 +148,8 @@ p.course <-
           alpha = 0.2,
           color = NA) +
   geom_sf(fill = NA, color = 'black', size = 1.25) +
-  geom_sf(data = places, shape = 20, size = a*350, color = 'deeppink') +
-  geom_sf_text_repel(data = places, aes(label = place), color = 'black', size = a*400) +
-  labs(x = NULL,
-       y = NULL,
-       title = paste0('Distance: ', round(course.smmry$tot.dist/1609), ' mi   ',
-                      'Elevation: ', round(course.smmry$ele.gain*3.28084), ' ft   ',
-                      'Duration: ~ ', course.smmry$duration, ' hr')) +
-  theme_map(font_size = a*800) +
+  geom_sf(data = places, shape = 20, size = label.size, color = 'deeppink') +
+  theme_map(font_size = plot.size) +
   theme(
     axis.text = element_text(color = rgb(0.1, 0.1, 0.1, 0.3)),
     panel.border = element_blank(),
@@ -177,8 +157,10 @@ p.course <-
     panel.background = element_blank(),
     panel.ontop = TRUE,
     plot.background = element_rect(fill = "transparent", color = NA),
-    plot.title = element_text(family = 'Helvetica', face = 'bold', size = a*1100, hjust = 0.5)
+    plot.title = element_text(family = 'Helvetica', face = 'bold', size = title.size, hjust = 0.5)
   )
+
+# Plot profile
 p.profile <-
   course %>%
   ggplot() +
@@ -193,62 +175,15 @@ p.profile <-
             size = 2,
             linejoin = 'round',
             lineend = 'round') +
-  labs(x = 'Miles', y = NULL, title = paste0('Course Profile'), color = 'Grade') +
+  labs(x = 'Miles', y = NULL, color = 'Grade') +
   guides(color = guide_colorbar(barwidth = w*100*2,
                                 title.vjust = 0.8)) +
   scale_color_viridis_c(option = 'magma') +
   scale_y_continuous(limits = c(min(course$altitude*3.28084), max(course$altitude*3.28084))) +
-  theme_classic(base_size = a*800, base_family = 'Helvetica') +
+  theme_classic(base_size = plot.size, base_family = 'Helvetica') +
   theme(plot.background = element_rect(fill = 'transparent', color = NA),
         panel.background = element_rect(fill = 'transparent', color = NA),
-        plot.title = element_text(family = 'Helvetica', face = 'bold', size = a*1100, hjust = 0.5),
-=======
-course.box <- st_bbox(bbox_widen(st_bbox(course),
-                                 crs = 4326,
-                                 c('left' = 0.1,
-                                   'right' = 0.1,
-                                   'top' = 0.1,
-                                   'bottom' = 0.1)))
-p.course <- course %>%
-  st_combine() %>%
-  st_cast('LINESTRING') %>%
-  ggplot() +
-  geom_sf(data = bbox_widen(st_bbox(course), crs = 4326, c('left' = 0.1, 'right' = 0.1, 'top' = 0.1, 'bottom' = 0.1)), fill = 'cornflowerblue', alpha = 0.2, color = NA) +
-  geom_sf(fill = NA, color = 'black', size = 1.25) +
-  geom_sf(data = places, shape = 8, size = 4, color = 'deeppink') +
-  geom_sf_text(data = places, aes(label = place), vjust = -1) +
-  annotate('text',
-           x = course.box$xmin + (1/5*(course.box$xmax - course.box$xmin)),
-           y = course.box$ymin + (1/5*(course.box$ymax - course.box$ymin)),
-           label = paste0('Distance: ', round(course.smmry$tot.dist/1609), ' mi\n',
-                          'Elevation: ', round(course.smmry$ele.gain*3.28084), ' ft\n',
-                          'Duration: ~', course.smmry$duration, ' hr'),
-           size = 4) +
-  labs(x = NULL, y = NULL) +
-  scale_shape_manual(name = NULL, values = c('volcano' = 2)) +
-  scale_color_viridis_c(option = 1) +
-  scale_fill_viridis_c(name = bquote(mWm^-2), option = 1, na.value = 'transparent') +
-  theme_map(font_size = 8) +
-  theme(
-    axis.text = element_text(),
-    panel.border = element_blank(),
-    panel.grid = element_line(size = 0.25, color = rgb(0.1, 0.1, 0.1, 0.5)),
-    panel.background = element_blank(),
-    panel.ontop = TRUE,
-    plot.background = element_rect(fill = "transparent", color = NA)
-  )
-p.profile <- course %>%
-  ggplot() +
-  geom_ribbon(aes(x = distance/1609, ymin = min(altitude)*3.28084, ymax = altitude*3.28084), alpha = 0.1) +
-  geom_path(aes(x = distance/1609, y = altitude*3.28084, color = av.grad), size = 2, linejoin = 'round', lineend = 'round') +
-  labs(x = 'Miles', y = NULL, title = 'Course Profile', color = 'Grade') +
-  scale_color_viridis_c(option = 'viridis') +
-  scale_y_continuous(limits = c(min(course$altitude*3.28084), max(course$altitude*3.28084))) +
-  theme_classic(base_size = 11, base_family = 'Helvetica') +
-  theme(plot.background = element_rect(fill = 'transparent', color = NA),
-        panel.background = element_rect(fill = 'transparent', color = NA),
-        plot.title = element_text(hjust = 0.5, vjust = 0.5),
->>>>>>> 1452479fe7c709d0ee299f970ec6eaf5a0be01e7
+        plot.title = element_text(family = 'Helvetica', face = 'bold', size = title.size, hjust = 0.5),
         axis.line.y = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks.y = element_blank(),
@@ -256,18 +191,15 @@ p.profile <- course %>%
         axis.text.x = element_text(color = 'black'),
         legend.position = 'bottom',
         legend.background = element_rect(fill = 'transparent', color = NA))
-<<<<<<< HEAD
+
+# Plot composition
 p.comp <-
   p.course / p.profile + plot_layout(ncol = 1, heights = c(5,1)) &
   theme(panel.background = element_rect(fill = 'transparent', color = NA),
         plot.background = element_rect(fill = 'transparent', color = NA))
+
+# Saving plots
 cat('Saving course maps to courses/', f ,'*.png\n', sep = '')
-=======
-p.comp <- p.course / p.profile + plot_layout(ncol = 1, heights = c(5,1)) &
-  theme(panel.background = element_rect(fill = 'transparent', color = NA),
-        plot.background = element_rect(fill = 'transparent', color = NA))
-cat('Saving course maps to courses/,', f ,'*.png\n', sep = '')
->>>>>>> 1452479fe7c709d0ee299f970ec6eaf5a0be01e7
 suppressWarnings({
   ggsave(
     paste0('courses/', f, '-course.png'),
@@ -312,20 +244,13 @@ suppressWarnings({
     bg = 'transparent'
   )
 })
-<<<<<<< HEAD
 
 # Leaflet
-=======
->>>>>>> 1452479fe7c709d0ee299f970ec6eaf5a0be01e7
 cat('Saving leflet map to courses/', f ,'-leaflet.html\n', sep = '')
 leaflet(course %>% st_combine() %>% st_cast('LINESTRING'),
         sizingPolicy = leafletSizingPolicy(browser.fill = F)) %>%
   addAwesomeMarkers(data = places, label = ~place,
-<<<<<<< HEAD
-             icon = awesomeIcons(icon = 'coffee-mug', markerColor = 'black')) %>%
-=======
              icon = awesomeIcons(icon = 'coffee-mug', markerColor = 'black')) %>% 
->>>>>>> 1452479fe7c709d0ee299f970ec6eaf5a0be01e7
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolylines(color = 'deeppink', opacity = 0.8) %>%
   saveWidget(file=paste0('courses/', f, '-leaflet.html'))
