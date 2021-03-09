@@ -292,6 +292,7 @@
 			margin: ($gutter * -1) 0 0 ($gutter * -1);
 
 			article {
+				height: 100%;
 				width: calc(#{(100% / 3)} - #{$gutter * 1});
 				margin: $gutter 0 0 $gutter;
 			}
@@ -303,6 +304,7 @@
 			margin: ($gutter * -1) 0 0 ($gutter * -1);
 
 			article {
+				height: 100%;
 				width: calc(#{(100% / 2)} - #{$gutter * 1});
 				margin: $gutter 0 0 $gutter;
 			}
@@ -314,6 +316,7 @@
 			margin: ($gutter * -1) 0 0 ($gutter * -1);
 
 			article {
+				height: 100%;
 				width: calc(#{(100% / 2)} - #{$gutter * 1});
 				margin: $gutter 0 0 $gutter;
 
@@ -331,6 +334,7 @@
 			margin: 0;
 
 			article {
+				height: 100%;
 				width: 100%;
 				margin: $gutter 0 0 0;
 			}
