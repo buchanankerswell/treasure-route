@@ -11,6 +11,7 @@ suppressMessages({
   library(htmlwidgets)
   library(RColorBrewer)
   library(ggrepel)
+  library(ggsflabel)
 })
 
 cat('Defining course mapping functions\n')
@@ -23,6 +24,7 @@ replace_outliers <- function(x, na.rm = TRUE, ...) {
   y[x > (qnt[2] + 2*H)] <- 0
   y
 }
+
 # Draw a widened box from a st_bbox object
 bbox_widen <- function(bbox, crs, borders = c('left' = 0.5, 'right' = 0.5, 'top' = 0, 'bottom' = 0)) {
   b <- bbox # current bounding box
@@ -61,17 +63,22 @@ splt <- function(dst, cut.prop = 4) {
     # Return results
     return(cut.ind)
 }
+
 cat('Reading files\n')
+
 # List gpx files
 files <- list.files('.', '*.gpx')
+
 # Filenames
 fname <- map_chr(files, ~substr(.x, 1, nchar(.x)-4))
 cat('Found', length(files), 'files\n')
 cat('Courses:', fname, sep = '\n')
+
 # Take Rscript arguments
 args <- commandArgs(TRUE)
 f <- args[1]
 cat('Reading course:', f, '\n')
+
 # Read courses
 d <- readGPX(files[fname %in% f]) %>% as_tibble()
 course <- st_as_sf(d, coords = c(3,2), crs = 4326) %>%
@@ -95,7 +102,7 @@ course.smmry <- course %>%
                                           units = 'hours')),1))
 # Places
 places <- tibble(
-  place = c('district coffee'),
+  place = c('District Coffee'),
   lat = c(43.618260),
   lon = c(-116.204595)
 ) %>%
@@ -105,51 +112,69 @@ places <- tibble(
 cat('Plotting course:', f, '\n')
 
 # Plot course
-course.box <- st_bbox(bbox_widen(st_bbox(course),
-                                 crs = 4326,
-                                 c('left' = 0.1,
-                                   'right' = 0.1,
-                                   'top' = 0.1,
-                                   'bottom' = 0.1)))
-p.course <- course %>%
+course.box <- 
+  bbox_widen(st_bbox(course),
+             crs = 4326,
+             c('left' = 0.1,
+               'right' = 0.1,
+               'top' = 0.1,
+               'bottom' = 0.1))
+
+# Scaling factors
+w <- abs(st_bbox(course.box)$xmax - st_bbox(course.box)$xmin)
+h <- abs(st_bbox(course.box)$ymax - st_bbox(course.box)$ymin)
+a <- h*w
+
+p.course <-
+  course %>%
   st_combine() %>%
   st_cast('LINESTRING') %>%
   ggplot() +
-  geom_sf(data = bbox_widen(st_bbox(course), crs = 4326, c('left' = 0.1, 'right' = 0.1, 'top' = 0.1, 'bottom' = 0.1)), fill = 'cornflowerblue', alpha = 0.2, color = NA) +
+  geom_sf(data = course.box,
+          fill = 'grey50',
+          alpha = 0.2,
+          color = NA) +
   geom_sf(fill = NA, color = 'black', size = 1.25) +
-  geom_sf(data = places, shape = 8, size = 4, color = 'deeppink') +
-  geom_sf_text(data = places, aes(label = place), vjust = -1) +
-  annotate('text',
-           x = course.box$xmin + (1/5*(course.box$xmax - course.box$xmin)),
-           y = course.box$ymin + (1/5*(course.box$ymax - course.box$ymin)),
-           label = paste0('Distance: ', round(course.smmry$tot.dist/1609), ' mi\n',
-                          'Elevation: ', round(course.smmry$ele.gain*3.28084), ' ft\n',
-                          'Duration: ~', course.smmry$duration, ' hr'),
-           size = 4) +
-  labs(x = NULL, y = NULL) +
-  scale_shape_manual(name = NULL, values = c('volcano' = 2)) +
-  scale_color_viridis_c(option = 1) +
-  scale_fill_viridis_c(name = bquote(mWm^-2), option = 1, na.value = 'transparent') +
-  theme_map(font_size = 8) +
+  geom_sf(data = places, shape = 20, size = a*350, color = 'deeppink') +
+  geom_sf_text_repel(data = places, aes(label = place), color = 'black', size = a*400) +
+  labs(x = NULL,
+       y = NULL,
+       title = paste0('Distance: ', round(course.smmry$tot.dist/1609), ' mi   ',
+                      'Elevation: ', round(course.smmry$ele.gain*3.28084), ' ft   ',
+                      'Duration: ~ ', course.smmry$duration, ' hr')) +
+  theme_map(font_size = a*800) +
   theme(
-    axis.text = element_text(),
+    axis.text = element_text(color = rgb(0.1, 0.1, 0.1, 0.3)),
     panel.border = element_blank(),
-    panel.grid = element_line(size = 0.25, color = rgb(0.1, 0.1, 0.1, 0.5)),
+    panel.grid = element_line(size = 0.25, color = rgb(0.1, 0.1, 0.1, 0.1)),
     panel.background = element_blank(),
     panel.ontop = TRUE,
-    plot.background = element_rect(fill = "transparent", color = NA)
+    plot.background = element_rect(fill = "transparent", color = NA),
+    plot.title = element_text(family = 'Helvetica', face = 'bold', size = a*1100, hjust = 0.5)
   )
-p.profile <- course %>%
+p.profile <-
+  course %>%
   ggplot() +
-  geom_ribbon(aes(x = distance/1609, ymin = min(altitude)*3.28084, ymax = altitude*3.28084), alpha = 0.1) +
-  geom_path(aes(x = distance/1609, y = altitude*3.28084, color = av.grad), size = 2, linejoin = 'round', lineend = 'round') +
-  labs(x = 'Miles', y = NULL, title = 'Course Profile', color = 'Grade') +
-  scale_color_viridis_c(option = 'viridis') +
+  geom_ribbon(aes(x = distance/1609,
+                  ymin = min(altitude)*3.28084,
+                  ymax = altitude*3.28084),
+              fill = 'grey50',
+              alpha = 0.2) +
+  geom_path(aes(x = distance/1609,
+                y = altitude*3.28084,
+                color = av.grad),
+            size = 2,
+            linejoin = 'round',
+            lineend = 'round') +
+  labs(x = 'Miles', y = NULL, title = paste0('Course Profile'), color = 'Grade') +
+  guides(color = guide_colorbar(barwidth = w*100*2,
+                                title.vjust = 0.8)) +
+  scale_color_viridis_c(option = 'magma') +
   scale_y_continuous(limits = c(min(course$altitude*3.28084), max(course$altitude*3.28084))) +
-  theme_classic(base_size = 11, base_family = 'Helvetica') +
+  theme_classic(base_size = a*800, base_family = 'Helvetica') +
   theme(plot.background = element_rect(fill = 'transparent', color = NA),
         panel.background = element_rect(fill = 'transparent', color = NA),
-        plot.title = element_text(hjust = 0.5, vjust = 0.5),
+        plot.title = element_text(family = 'Helvetica', face = 'bold', size = a*1100, hjust = 0.5),
         axis.line.y = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks.y = element_blank(),
@@ -157,18 +182,19 @@ p.profile <- course %>%
         axis.text.x = element_text(color = 'black'),
         legend.position = 'bottom',
         legend.background = element_rect(fill = 'transparent', color = NA))
-p.comp <- p.course / p.profile + plot_layout(ncol = 1, heights = c(5,1)) &
+p.comp <-
+  p.course / p.profile + plot_layout(ncol = 1, heights = c(5,1)) &
   theme(panel.background = element_rect(fill = 'transparent', color = NA),
         plot.background = element_rect(fill = 'transparent', color = NA))
-cat('Saving course maps to courses/,', f ,'*.png\n', sep = '')
+cat('Saving course maps to courses/', f ,'*.png\n', sep = '')
 suppressWarnings({
   ggsave(
     paste0('courses/', f, '-course.png'),
     plot = p.course,
     device = 'png',
     scale = 1,
-    width = 7,
-    height = 7,
+    width = w*100,
+    height = h*100,
     units = 'in',
     bg = 'transparent'
   )
@@ -177,8 +203,8 @@ suppressWarnings({
     plot = p.profile,
     device = 'png',
     scale = 1,
-    width = 10,
-    height = 3,
+    width = w*100,
+    height = w*100*3/10,
     units = 'in',
     bg = 'transparent'
   )
@@ -187,8 +213,9 @@ suppressWarnings({
     plot = p.comp,
     device = 'png',
     scale = 1,
-    width = 7,
-    height = 5,
+    width = w*100,
+    height = (h*100 +
+      w*100*3/10),
     units = 'in',
     bg = 'transparent'
   )
@@ -197,17 +224,20 @@ suppressWarnings({
     plot = p.comp,
     device = 'png',
     scale = 1,
-    width = 10,
-    height = 5.6,
+    width = w*100*1.5,
+    height = (h*100 +
+                w*100*3/10),
     units = 'in',
     bg = 'transparent'
   )
 })
+
+# Leaflet
 cat('Saving leflet map to courses/', f ,'-leaflet.html\n', sep = '')
 leaflet(course %>% st_combine() %>% st_cast('LINESTRING'),
         sizingPolicy = leafletSizingPolicy(browser.fill = F)) %>%
   addAwesomeMarkers(data = places, label = ~place,
-             icon = awesomeIcons(icon = 'coffee-mug', markerColor = 'black')) %>% 
+             icon = awesomeIcons(icon = 'coffee-mug', markerColor = 'black')) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolylines(color = 'deeppink', opacity = 0.8) %>%
   saveWidget(file=paste0('courses/', f, '-leaflet.html'))
